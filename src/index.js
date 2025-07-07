@@ -2,7 +2,9 @@ import "./styles.css";
 import { TodoItem } from "./todo-item.js";
 import { Project } from "./project.js";
 import { ProjectManager } from "./project-manager.js";
+
 import { Sidebar } from "./sidebar.js";
+import { assignSidebarAnimation } from "./hookupSidebarAnim.js";
 
 const myProjects = new ProjectManager("My Projects");
 const herProjects = new ProjectManager("Her Projects");
@@ -10,9 +12,11 @@ const herProjects = new ProjectManager("Her Projects");
 new Project(myProjects, "Work", "red");
 new Project(myProjects, "Train", "blue");
 
-const container = document.querySelector("#container")
-const sidebar = new Sidebar(container);
-sidebar.render();
+assignSidebarAnimation();
+
+console.log(ProjectManager.getManagers())
+Sidebar.populateProjects();
+
 
 //projects factory
 // - default Project

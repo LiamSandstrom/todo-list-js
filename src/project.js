@@ -38,6 +38,7 @@ export class Project {
   getAllItems = () => this.#items;
   getName = () => this.#name;
   getColor = () => this.#color;
+  getItemsAmount = () => this.#items.size;
 
   //setters
   setName = () => this.#name;

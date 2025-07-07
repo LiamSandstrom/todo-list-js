@@ -1,31 +1,53 @@
+import { ProjectManager } from "./project-manager";
 
 export class Sidebar {
-    #container;
-    #sidebarDiv;
-    #topbarDiv;
-    #username;
-    #onButton;
+  static #sidebarDiv = document.querySelector("#sidebar");
+  static #topbarDiv = document.querySelector("#sidebar-topbar");
+  static #username = document.querySelector("#topbar-name");
+  static #closeButton = document.querySelector("#close-btn");
+  static #container = document.querySelector("#container");
+  static #sidebarContent = document.querySelector("#sidebar-content");
+  static #amounts = new Map();
 
-    constructor(container){
-        this.#container = container;
-        this.#sidebarDiv = document.createElement("div");
-        this.#topbarDiv = document.createElement("div");
-        this.#username = document.createElement("p")
-        this.#onButton = document.createElement("button")
-    }
+  static populateProjects() {
+    ProjectManager.getManagers().forEach((projManager, key) => {
+      const title = document.createElement("h2");
+      const managerDiv = document.createElement("div");
+      managerDiv.classList.add("category");
+      managerDiv.dataset.key = key;
 
-    render(){
-        this.#sidebarDiv.id = "sidebar";
-        this.#topbarDiv.classList.add("topbar");
+      const categoryDiv = document.createElement("div");
+      categoryDiv.appendChild(title);
+      categoryDiv.classList.add("category-title-div");
+      title.textContent = projManager.getName();
+      managerDiv.appendChild(categoryDiv);
+      console.log(projManager);
 
-        this.#username.textContent = "Username"
-        this.#onButton.textContent = "III"
-        this.#onButton.id= "close-btn"
-        this.#topbarDiv.appendChild(this.#username)
-        this.#topbarDiv.appendChild(this.#onButton)
+      projManager.getAllProjects().forEach((project, projKey) => {
+        const projectDiv = document.createElement("div");
+        projectDiv.classList.add("project-div");
+        projectDiv.dataset.key = projKey;
 
-        this.#sidebarDiv.appendChild(this.#topbarDiv)
-        this.#container.appendChild(this.#sidebarDiv)
-    }
+        const projectTitle = document.createElement("h3");
+        projectTitle.textContent = "# " + project.getName();
+        projectDiv.appendChild(projectTitle);
 
+        const amount = document.createElement("p");
+        Sidebar.#amounts.set(amount, project);
+        projectDiv.appendChild(amount);
+
+
+        managerDiv.appendChild(projectDiv);
+      });
+
+      Sidebar.updateAmounts();
+      Sidebar.#sidebarContent.appendChild(managerDiv);
+    });
+  }
+
+  static updateAmounts(){
+    Sidebar.#amounts.forEach((value, key) => {
+      key.textContent = value.getItemsAmount();
+    })
+  }
 }
