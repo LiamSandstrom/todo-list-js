@@ -14,22 +14,29 @@
 
     openBtn.addEventListener("click", () => {
       toggleWidth(sidebar, "0", sidebarWidth, animationTime);
-      openBtn.style.transition = "opacity 0.3s";
-      openBtn.style.opacity = "0%";
 
+      openBtn.style.transition = "opacity 0.15s";
+      openBtn.style.opacity = "0%";
       animRef = setTimeout(() => {
         animRef = null;
         openBtn.style.visibility = "collapse";
-      }, 300);
+      }, 500);
+        setTimeout(()=> {
+
+        closeBtn.style.transition = "opacity 0.4s";
+        closeBtn.style.opacity = "100%";
+        },200)
     });
 
     closeBtn.addEventListener("click", () => {
       clearTimeout(animRef);
       toggleWidth(sidebar, sidebarWidth, "0", animationTime);
       openBtn.style.visibility = "visible";
+      closeBtn.style.transition = "opacity 0.4s";
+      closeBtn.style.opacity = "0%";
       setTimeout(() => {
-        openBtn.style.transition = "opacity 0.4s";
+        openBtn.style.transition = "opacity 0.5s";
         openBtn.style.opacity = "100%";
-      }, 20);
+      }, 200);
     });
   }
