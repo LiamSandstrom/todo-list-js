@@ -11,6 +11,8 @@ export class TodoItem {
     this.#description = description;
     this.#dueDate = dueDate;
     this.#priority = priority;
+
+    this.#project.addItem(this);
   }
 
   //getters

@@ -1,11 +1,12 @@
 import "./styles.css"
 import {TodoItem} from "./todo-item.js"
+import {Project} from "./project.js"
 
+const proj = new Project();
+const proj2 = new Project();
 
-
-
-
-
+const item = new TodoItem(proj, "can win")
+proj.addItem(item)
 
 //projects factory
     // - default Project
