@@ -9,17 +9,9 @@
     "devo": "webpack serve --open --config webpack.dev.js",
     "deploy": "git subtree push --prefix dist origin gh-pages"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LiamSandstrom/webpack-template.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/LiamSandstrom/webpack-template/issues"
-  },
-  "homepage": "https://github.com/LiamSandstrom/webpack-template#readme",
   "description": "",
   "devDependencies": {
     "css-loader": "^7.1.2",

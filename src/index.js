@@ -1,10 +1,5 @@
 import "./styles.css"
-
-
-
-
-
-
+import {TodoItem} from "./todo-item.js"
 
 
 

@@ -1,4 +1,4 @@
-class TodoItem {
+export class TodoItem {
   #project;
   #title;
   #description;
