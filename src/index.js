@@ -32,7 +32,7 @@ import "./styles.css"
     // - prio
     // - checked
 
-
+//local storage
 
 
 //dom Stuff
