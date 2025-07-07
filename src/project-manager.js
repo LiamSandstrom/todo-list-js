@@ -1,25 +1,33 @@
 import { Project } from "./project.js";
 
 export class ProjectManager {
-  static #managers = new Set();
+    // Can sort projects under different managers
+  static #managers = new Map();
   #projects;
   #name;
-  constructor(name) {
-    this.#projects = new Set();
-    this.#name = name;
+  #id;
 
-    ProjectManager.#managers.add(this);
+  constructor(name) {
+    // this managers projects
+    this.#projects = new Map();
+    this.#name = name;
+    this.#id = crypto.randomUUID();
+
+    
+    ProjectManager.#managers.set(this.#id, this);
   }
 
   addProject(project) {
-    this.#projects.add(project);
+    const id = crypto.randomUUID();
+    this.#projects.set(id, project);
   }
 
-  removeProject(project) {
-    this.#projects.delete(project);
+  removeProject(key) {
+    this.#projects.delete(key);
   }
 
   static getManagers = () => ProjectManager.#managers;
   getAllProjects = () => this.#projects;
   getName = () => this.#name;
+  getId = () => this.#id;
 }

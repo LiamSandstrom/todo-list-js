@@ -9,8 +9,6 @@ const herProjects = new ProjectManager("Her Projects");
 new Project(myProjects, "Work", "red");
 new Project(myProjects, "Train", "blue");
 
-console.log(myProjects.getAllProjects())
-console.log(herProjects.getAllProjects())
 console.log(ProjectManager.getManagers())
 
 

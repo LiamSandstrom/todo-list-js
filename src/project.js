@@ -11,7 +11,8 @@ export class Project {
     if(projectManager == null && typeof projectManager.addProject !== "function") throw new Error("Invalid project manager")
 
     this.#projectManager = projectManager;
-    this.#items = new Set();
+    //this projects todo-items
+    this.#items = new Map();
     this.#name = name;
     this.#color = color;
 
@@ -25,11 +26,12 @@ export class Project {
   }
 
   addItem(item) {
-    this.#items.add(item);
+    const key = crypto.randomUUID();
+    this.#items.set(key, item);
   }
 
-  removeItem(item) {
-    this.#items.delete(item);
+  removeItem(key) {
+    this.#items.delete(key);
   }
 
   //getters
