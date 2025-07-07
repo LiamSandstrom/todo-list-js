@@ -1,10 +1,16 @@
+import { ProjectManager } from "./project-manager.js";
 import { TodoItem } from "./todo-item.js";
 
 export class Project {
   #items;
   #name;
   #color;
-  constructor(name, color) {
+  #projectManager;
+
+  constructor(projectManager, name, color) {
+    if(projectManager == null && typeof projectManager.addProject !== "function") throw new Error("Invalid project manager")
+
+    this.#projectManager = projectManager;
     this.#items = new Set();
     this.#name = name;
     this.#color = color;
@@ -13,6 +19,9 @@ export class Project {
     new TodoItem(this, "lop");
     new TodoItem(this, "katt");
     new TodoItem(this, "hund");
+
+    this.#projectManager.addProject(this);
+
   }
 
   addItem(item) {
@@ -24,7 +33,7 @@ export class Project {
   }
 
   //getters
-  getItems = () => this.#items;
+  getAllItems = () => this.#items;
   getName = () => this.#name;
   getColor = () => this.#color;
 

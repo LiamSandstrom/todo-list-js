@@ -6,7 +6,7 @@ export class TodoItem {
   #priority;
 
   constructor(project, title, description, dueDate, priority) {
-    if(project == null) throw new Error("Todo item needs to be assigned a project");
+    if(project == null || typeof project.addItem !== "function") throw new Error("Todo item needs to be assigned a project");
 
     this.#project = project;
     this.#title = title;

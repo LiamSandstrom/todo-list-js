@@ -1,12 +1,19 @@
 import "./styles.css"
 import {TodoItem} from "./todo-item.js"
 import {Project} from "./project.js"
+import { ProjectManager } from "./project-manager.js";
 
-const proj = new Project();
-const proj2 = new Project();
+const myProjects = new ProjectManager("My Projects");
+const herProjects = new ProjectManager("Her Projects");
 
-const item = new TodoItem(proj, "can win")
-proj.addItem(item)
+new Project(myProjects, "Work", "red");
+new Project(myProjects, "Train", "blue");
+
+console.log(myProjects.getAllProjects())
+console.log(herProjects.getAllProjects())
+console.log(ProjectManager.getManagers())
+
+
 
 //projects factory
     // - default Project
