@@ -51,6 +51,7 @@ body {
 
   overflow: hidden;
   will-change: width;
+  flex-shrink: 0;
 }
 
 #sidebar-content {
@@ -140,8 +141,19 @@ body {
 
 #content {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   height: 100%;
   flex-grow: 1;
   background-color: var(--content-bg-color);
+}
+
+#todo-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  flex-grow: 1;
 }

@@ -16,10 +16,10 @@ export class Project {
     this.#name = name;
     this.#color = color;
 
-    new TodoItem(this, "bob");
-    new TodoItem(this, "lop");
-    new TodoItem(this, "katt");
-    new TodoItem(this, "hund");
+    const randomNumber = Math.floor(Math.random() * 10);
+    for(let i = 0; i < randomNumber; i++){
+      new TodoItem(this, i, "testi")
+    }
 
     this.#projectManager.addProject(this);
 
@@ -35,7 +35,7 @@ export class Project {
   }
 
   //getters
-  getAllItems = () => this.#items;
+  getItems = () => this.#items;
   getName = () => this.#name;
   getColor = () => this.#color;
   getItemsAmount = () => this.#items.size;

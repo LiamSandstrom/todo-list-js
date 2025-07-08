@@ -15,7 +15,7 @@
     openBtn.addEventListener("click", () => {
       toggleWidth(sidebar, "0", sidebarWidth, animationTime);
 
-      openBtn.style.transition = "opacity 0.15s";
+      openBtn.style.transition = "opacity 0.17s";
       openBtn.style.opacity = "0%";
       animRef = setTimeout(() => {
         animRef = null;
@@ -25,7 +25,7 @@
 
         closeBtn.style.transition = "opacity 0.4s";
         closeBtn.style.opacity = "100%";
-        },200)
+        },230)
     });
 
     closeBtn.addEventListener("click", () => {

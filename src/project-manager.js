@@ -27,7 +27,9 @@ export class ProjectManager {
   }
 
   static getManagers = () => ProjectManager.#managers;
+  static getManager = (key) => ProjectManager.#managers.get(key);
   getAllProjects = () => this.#projects;
+  getProject = (key) => this.#projects.get(key);
   getName = () => this.#name;
   getId = () => this.#id;
 }
