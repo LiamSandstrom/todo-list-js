@@ -9,6 +9,7 @@ export class Sidebar {
   static #container = document.querySelector("#container");
   static #sidebarContent = document.querySelector("#sidebar-content");
   static #amounts = new Map();
+  static #currentProject;
 
   static populateProjects() {
     ProjectManager.getManagers().forEach((projManager, key) => {
@@ -55,7 +56,18 @@ export class Sidebar {
   static #bindProjectOnClick(project) {
     project.addEventListener("click", () => {
       Page.renderPage(project.dataset.managerKey, project.dataset.key);
+      Sidebar.#setCurrentProject(project);
     });
+  }
+
+  static #setCurrentProject(project) {
+    if (Sidebar.#currentProject != null || Sidebar.#currentProject == project) {
+      Sidebar.#currentProject.style.backgroundColor = null;
+      Sidebar.#currentProject.style.color = window.getComputedStyle(document.body).getPropertyValue("--main-text-color");
+    }
+    Sidebar.#currentProject = project;
+    Sidebar.#currentProject.style.backgroundColor = window.getComputedStyle(document.body).getPropertyValue("--selected-bg");
+    Sidebar.#currentProject.style.color = window.getComputedStyle(document.body).getPropertyValue("--accent-color");
   }
 
   static updateAmounts() {

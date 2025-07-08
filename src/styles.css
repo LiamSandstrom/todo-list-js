@@ -80,6 +80,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: padding 0.2s, background-color 0.2s;
+    will-change: padding;
 }
 
 .project-div p {
@@ -97,7 +99,7 @@ body {
 
 .category h3 {
   font-size: 0.9rem;
-  font-weight: normal;
+  font-weight: 300;
 }
 
 .project-div:hover, .category-title-div:hover {
@@ -154,6 +156,39 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
+  width: 80%;
   flex-grow: 1;
+}
+
+.todo-item{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--light-text-color);
+  padding: 8px 0;
+  gap: 5px;
+
+  cursor: pointer;
+}
+
+.todo-item-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.todo-item h3{
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--secondary-text-color);
+}
+
+.todo-item p{
+  font-size: 0.75rem;
+  font-weight: 300;
+  color: var(--light-text-color);
+}
+
+vaadin-checkbox {
+  scale: 0.95;
 }
