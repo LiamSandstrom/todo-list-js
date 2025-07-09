@@ -268,6 +268,7 @@ select, textarea{
 dialog {
   border: 0;
   border-radius: 10px;
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.111);
 }
 
 input{
@@ -275,7 +276,7 @@ input{
 }
 
 .popup-title{
-  font-size: 1.5rem;
+  font-size: 1.13rem;
   padding: 10px;
   height: 100%;
   grid-area: title;

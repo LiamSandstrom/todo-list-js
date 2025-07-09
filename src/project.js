@@ -20,13 +20,12 @@ export class Project {
 
     const randomNumber = Math.floor(Math.random() * 10);
     for(let i = 0; i < randomNumber; i++){
-      new TodoItem(this, "Item: "+ i, "testi", "2022-11-11")
+      new TodoItem(this, "Item: "+ i, "testi", "2022-11-11", 2)
     }
 
     this.#projectManager.addProject(this);
     for(const key of this.#items.keys()){
     this.#order.push(key);
-    console.log("i")
     }
   }
 

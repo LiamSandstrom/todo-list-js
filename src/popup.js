@@ -3,8 +3,6 @@ export class Popup {
 
   static render(popup) {
     Popup.#currentPopup = document.createElement("dialog");
-    console.log(popup)
-    console.log(popup)
     Popup.#currentPopup.appendChild(popup);
 
     document.body.appendChild(Popup.#currentPopup);
@@ -13,7 +11,8 @@ export class Popup {
   }
 
   static remove() {
-    if (Popup.#currentPopup == null) return;
+    if (Popup.#currentPopup == null || document.body.contains(Popup.#currentPopup) == false) return;
+    
 
     document.body.removeChild(Popup.#currentPopup);
   }

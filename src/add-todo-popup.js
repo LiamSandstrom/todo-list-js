@@ -1,4 +1,7 @@
-export function todoPopup() {
+import { Popup } from "./popup";
+import { Page } from "./render-page";
+
+export function todoPopup(project, key = null) {
   const div = document.createElement("div");
   div.classList.add("todo-popup");
 
@@ -14,6 +17,7 @@ export function todoPopup() {
 
   title.maxLength = "30";
   desc.maxLength = "250";
+  dueDate.min = new Date().toISOString().split("T")[0];
 
   title.placeholder = "Title...";
   desc.placeholder = "Description...";
@@ -46,5 +50,23 @@ export function todoPopup() {
 
   div.appendChild(text);
 
-  return div;
+  if (key != null) {
+    const todo = project.getItem(key);
+    title.value = todo.getTitle();
+    desc.value = todo.getDescription();
+    dueDate.value = todo.getDueDate();
+    prio.value = todo.getPriority();
+
+    saveBtn.addEventListener("click", () => {
+      const todo = project.getItem(key);
+      todo.setTitle(title.value);
+      todo.setDescription(desc.value);
+      todo.setDueDate(dueDate.value);
+      todo.setPriority(prio.value);
+    
+      Page.loadPage();
+      Popup.remove();
+    });
+  }
+    return div;
 }

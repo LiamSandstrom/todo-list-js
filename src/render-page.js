@@ -9,16 +9,28 @@ export class Page {
   static #currentPage;
   static #container = document.querySelector("#todo-container");
   static #sortableDiv = document.createElement("div");
+  static #managerKey;
+  static #projKey;
 
   static renderPage(managerKey, projKey) {
     if (projKey == Page.#currentPage) return;
-    Page.#removePage();
+    Page.#managerKey = managerKey;
+    Page.#projKey = projKey;
+    Page.loadPage();
+    opacityAnimation(Page.#container, 700);
+  }
 
-    Page.#renderAddTodo();
-    Page.#container.appendChild(Page.#sortableDiv);
-    Page.#sortableDiv.classList.add("sortable-container");
+  static loadPage() {
+    console.log("LOAD");
+    const managerKey = Page.#managerKey;
+    const projKey = Page.#projKey;
     const manager = ProjectManager.getManager(managerKey);
     const project = manager.getProject(projKey);
+    Page.#removePage();
+
+    Page.#renderAddTodo(project);
+    Page.#container.appendChild(Page.#sortableDiv);
+    Page.#sortableDiv.classList.add("sortable-container");
 
     const sortable = Sortable.create(Page.#sortableDiv, {
       animation: 300,
@@ -28,16 +40,11 @@ export class Page {
           order.push(ele.dataset.key);
         }
         manager.getProject(Page.#currentPage).setOrder(order);
-        console.log(manager.getProject(Page.#currentPage).getName());
       },
     });
 
-    opacityAnimation(Page.#container, 700);
     Page.#currentPage = projKey;
-    console.log("project: " + project.getName());
 
-
-      console.log(project.getOrder().length)
     for (const todoKey of project.getOrder()) {
       const todo = project.getItem(todoKey);
 
@@ -62,29 +69,37 @@ export class Page {
 
       todoDiv.appendChild(todoContentDiv);
       Page.#sortableDiv.appendChild(todoDiv);
+
+      todoDiv.addEventListener("click", () =>
+        Popup.render(todoPopup(project, todoKey))
+      );
+
+      checkBox.addEventListener("click", (event) => {
+        event.stopPropagation();
+      })
     }
   }
 
   static #removePage() {
     Page.#container.innerHTML = "";
-    Page.#sortableDiv.innerHTML ="";
+    Page.#sortableDiv.innerHTML = "";
   }
 
-  static #renderAddTodo() {
+  static #renderAddTodo(project) {
     const div = document.createElement("div");
     div.classList.add("add-todo-container");
 
     const plus = document.createElement("p");
-    plus.textContent ="+";
-    div.appendChild(plus)
+    plus.textContent = "+";
+    div.appendChild(plus);
 
     const text = document.createElement("p");
     text.textContent = "Add todo...";
-    div.appendChild(text)
+    div.appendChild(text);
 
     Page.#container.appendChild(div);
 
-    div.addEventListener("click", ()=> Popup.render(todoPopup()));
+    div.addEventListener("click", () => Popup.render(todoPopup(project)));
   }
   static getPage = () => Page.#currentPage;
 }

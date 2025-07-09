@@ -14,7 +14,6 @@ new Project(myProjects, "Train", "blue");
 
 assignSidebarAnimation();
 
-console.log(ProjectManager.getManagers())
 Sidebar.populateProjects();
 
 
