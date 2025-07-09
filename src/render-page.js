@@ -2,6 +2,7 @@ import { ProjectManager } from "./project-manager";
 import "@vaadin/checkbox";
 import { opacityAnimation } from "./opacity-animation";
 import Sortable from "sortablejs";
+import { Popup } from "./popup";
 
 export class Page {
   static #currentPage;
@@ -81,6 +82,8 @@ export class Page {
     div.appendChild(text)
 
     Page.#container.appendChild(div);
+
+    div.addEventListener("click", Popup.render);
   }
   static getPage = () => Page.#currentPage;
 }
