@@ -192,6 +192,10 @@ body {
   color: var(--secondary-text-color);
 }
 
+.todo-item *, .add-todo-container *{
+  min-width: max-content;
+}
+
 .todo-item p{
   font-size: 0.75rem;
   font-weight: 300;
@@ -224,4 +228,82 @@ vaadin-checkbox {
 
 .add-todo-container:hover *{
   color: var(--accent-color);
+}
+
+.todo-popup{
+  width: 330px;
+  height: 380px;
+  padding: 8px;
+
+  display: grid;
+  grid-template-columns: 5fr 100px;
+  grid-template-rows: 50px 25px 25px 1fr 40px;
+  grid-template-areas: 
+  "title title"
+  "desc date"
+  "desc prio"
+  "desc bob"
+  "save save"
+  ;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 11px;
+}
+
+input{
+  width: 100%;
+  border: 1px solid var(--lightest-text-color);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+select, textarea{
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid var(--lightest-text-color);
+  font-weight: 300;
+}
+
+dialog {
+  border: 0;
+  border-radius: 10px;
+}
+
+input{
+  font-weight: 300;
+}
+
+.popup-title{
+  font-size: 1.5rem;
+  padding: 10px;
+  height: 100%;
+  grid-area: title;
+}
+
+.popup-desc{
+  resize: none;
+  height: 100%;
+  grid-area: desc;
+  font-size: 1rem;
+  font-weight: 200;
+}
+
+.popup-save{
+  grid-area: save;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0);
+  border-radius: 10px;
+  border: 2px solid var(--light-text-color);
+  font-size: 1.2rem;
+  font-weight: 300;
+
+  transition: background-color 0.3s;
+}
+
+.popup-save:hover{
+  background-color: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+  cursor: pointer;
 }

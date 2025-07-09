@@ -3,6 +3,7 @@ import "@vaadin/checkbox";
 import { opacityAnimation } from "./opacity-animation";
 import Sortable from "sortablejs";
 import { Popup } from "./popup";
+import { todoPopup } from "./add-todo-popup";
 
 export class Page {
   static #currentPage;
@@ -83,7 +84,7 @@ export class Page {
 
     Page.#container.appendChild(div);
 
-    div.addEventListener("click", Popup.render);
+    div.addEventListener("click", ()=> Popup.render(todoPopup()));
   }
   static getPage = () => Page.#currentPage;
 }

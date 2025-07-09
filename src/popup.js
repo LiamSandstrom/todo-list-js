@@ -4,7 +4,8 @@ export class Popup {
   static render(popup) {
     Popup.#currentPopup = document.createElement("dialog");
     console.log(popup)
-    if(typeof popup == "Node") Popup.#currentPopup.appendChild(popup);
+    console.log(popup)
+    Popup.#currentPopup.appendChild(popup);
 
     document.body.appendChild(Popup.#currentPopup);
     Popup.#addClickOutsideRemove();
