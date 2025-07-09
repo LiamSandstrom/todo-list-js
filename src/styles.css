@@ -11,6 +11,7 @@
   --main-text-color: #202020;
   --secondary-text-color: #444444;
   --light-text-color: #acacac;
+  --lightest-text-color: #e8e8e8;
   --hover-bg: rgb(248, 235, 227);
   --selected-bg: rgb(248, 241, 227);
   --sidebar-width: 250px;
@@ -151,21 +152,29 @@ body {
   background-color: var(--content-bg-color);
 }
 
+
 #todo-container{
+  width: 80%;
+}
+
+.sortable-container{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  width: 80%;
   flex-grow: 1;
+  width: 100%;
+}
+
+.todo-item, .add-todo-container{
+  border-bottom: 1px solid var(--lightest-text-color);
+  padding: 8px 0;
 }
 
 .todo-item{
   width: 100%;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--light-text-color);
-  padding: 8px 0;
   gap: 5px;
 
   cursor: pointer;
@@ -191,4 +200,28 @@ body {
 
 vaadin-checkbox {
   scale: 0.95;
+  cursor:pointer;
+}
+
+.add-todo-container{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 100%;
+  gap: 5px;
+}
+
+.add-todo-container:hover{
+  cursor: pointer;
+}
+
+.add-todo-container p{
+  color: var(--light-text-color);
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+.add-todo-container:hover *{
+  color: var(--accent-color);
 }

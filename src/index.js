@@ -18,33 +18,17 @@ console.log(ProjectManager.getManagers())
 Sidebar.populateProjects();
 
 
-//projects factory
-// - default Project
-// - create new Projects
+//add todo item
+    // - ui for getting to pop up
+    // - create pop up 
+    // - add functionality for pop up
 
-//projectsManager
-// - get / - add / - remove projects
-// - helper functions
+//add project item
+    // - ui for getting to pop up
+    // - create pop up 
+    // - add functionality for pop up
 
-//project
-// - keep track of todo-items
-// - title
-// - color
+//Change todo item
+//Change project
 
-//todo-item
-// - title
-// - description
-// - dueDate
-// - prio
-// - checked
-
-//local storage
-
-//dom Stuff
-// - render projects in list
-// - make new screen with todo-items
-// - render todo-items
-// - todo on click create pop-up
-
-// index
-// -- button logic in a module
+//
