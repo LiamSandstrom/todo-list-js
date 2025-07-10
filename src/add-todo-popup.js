@@ -58,6 +58,7 @@ export function todoPopup(project, key = null) {
   //edit todo on save
   if (key != null) {
     const todo = project.getItem(key);
+    if(project.getItem(key) == undefined) return undefined;
     title.value = todo.getTitle();
     desc.value = todo.getDescription();
     dueDate.value = todo.getDueDate();

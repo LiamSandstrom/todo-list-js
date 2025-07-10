@@ -1,4 +1,6 @@
 import { Project } from "./project.js";
+import { Sidebar } from "./sidebar.js";
+import { Page } from "./render-page.js";
 
 export class ProjectManager {
     // Can sort projects under different managers
@@ -23,7 +25,24 @@ export class ProjectManager {
   }
 
   removeProject(key) {
+    if(key == Page.getPage()){
+      Page.removePage();
+      Sidebar.removeCurrentProject();
+    }
+    
     this.#projects.delete(key);
+    Sidebar.populateProjects();
+  }
+
+  static removeManager(key){
+    if(ProjectManager.getManager(key).getProject(Page.getPage()) != undefined){
+      Page.removePage();
+      Sidebar.removeCurrentProject();
+    }
+
+    ProjectManager.#managers.delete(key);
+    Sidebar.populateProjects();
+
   }
 
   static getManagers = () => ProjectManager.#managers;

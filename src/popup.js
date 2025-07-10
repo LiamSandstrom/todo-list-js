@@ -3,6 +3,7 @@ export class Popup {
 
   static render(popup) {
     Popup.#currentPopup = document.createElement("dialog");
+    if(popup == undefined) return;
     Popup.#currentPopup.appendChild(popup);
 
     document.body.appendChild(Popup.#currentPopup);

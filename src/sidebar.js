@@ -2,6 +2,8 @@ import { ProjectManager } from "./project-manager";
 import { Page } from "./render-page";
 import { projectPopup } from "./add-project-popup";
 import { Popup } from "./popup";
+import { categoryPopup } from "./add-category-popup";
+import deleteImg from "./icons/delete.svg"
 
 export class Sidebar {
   static #sidebarDiv = document.querySelector("#sidebar");
@@ -12,9 +14,13 @@ export class Sidebar {
   static #sidebarContent = document.querySelector("#sidebar-content");
   static #amounts = new Map();
   static #currentProject;
+  static #currentProjectKey;
 
   static populateProjects() {
     Sidebar.#sidebarContent.innerHTML = "";
+    Sidebar.#renderAddCategory();
+    console.log(Sidebar.#currentProject)
+    
     ProjectManager.getManagers().forEach((projManager, key) => {
       //Category title
       const title = document.createElement("h2");
@@ -29,13 +35,27 @@ export class Sidebar {
       const categoryDiv = document.createElement("div");
       categoryDiv.appendChild(title);
       categoryDiv.classList.add("category-title-div");
+
+      const plusDeleteDiv = document.createElement("div");
+      plusDeleteDiv.classList.add("amount-remove-div");
+
       const plus = document.createElement("p");
       plus.textContent = "+";
+      plusDeleteDiv.appendChild(plus)
+
+      const deleteCategory = document.createElement("img");
+      deleteCategory.src = deleteImg;
+      plusDeleteDiv.appendChild(deleteCategory)
+
+      categoryDiv.appendChild(plusDeleteDiv);
 
       plus.addEventListener("click", () => {
         Popup.render(projectPopup(key));
       })
-      categoryDiv.appendChild(plus);
+
+      deleteCategory.addEventListener("click", () => {
+        ProjectManager.removeManager(key);
+      })
 
       managerDiv.appendChild(categoryDiv);
 
@@ -51,10 +71,26 @@ export class Sidebar {
         projectTitle.textContent = "# " + project.getName();
         projectDiv.appendChild(projectTitle);
 
+        //amount and remove div
+        const amountRemoveDiv = document.createElement("div");
+        amountRemoveDiv.classList.add("amount-remove-div")
+
         //amount text
         const amount = document.createElement("p");
         Sidebar.#amounts.set(amount, project);
-        projectDiv.appendChild(amount);
+        amountRemoveDiv.appendChild(amount)
+
+        //remove
+        const remove = document.createElement("img");
+        remove.src = deleteImg
+        amountRemoveDiv.appendChild(remove)
+
+        remove.addEventListener("click", (event)=> {
+          projManager.removeProject(projKey);
+          event.stopPropagation();
+        })
+
+        projectDiv.appendChild(amountRemoveDiv);
 
         managerDiv.appendChild(projectDiv);
       });
@@ -62,6 +98,13 @@ export class Sidebar {
       Sidebar.updateAmounts();
       Sidebar.#sidebarContent.appendChild(managerDiv);
     });
+
+    console.log(Sidebar.#currentProject)
+    if(Sidebar.#currentProject != null){
+      const key = Sidebar.#currentProjectKey;
+      const proj = document.querySelector('[data-key="' + key + '"]')
+      Sidebar.#setCurrentProject(proj)
+    }
   }
 
   static #bindProjectOnClick(project) {
@@ -77,6 +120,7 @@ export class Sidebar {
       Sidebar.#currentProject.style.color = window.getComputedStyle(document.body).getPropertyValue("--main-text-color");
     }
     Sidebar.#currentProject = project;
+    Sidebar.#currentProjectKey = project.dataset.key;
     Sidebar.#currentProject.style.backgroundColor = window.getComputedStyle(document.body).getPropertyValue("--selected-bg");
     Sidebar.#currentProject.style.color = window.getComputedStyle(document.body).getPropertyValue("--accent-color");
   }
@@ -85,5 +129,29 @@ export class Sidebar {
     Sidebar.#amounts.forEach((value, key) => {
       key.textContent = value.getItemsAmount();
     });
+  }
+
+  static #renderAddCategory(){
+
+    const div = document.createElement("div");
+    div.classList.add("add-todo-container");
+    div.classList.add("category-padding");
+
+    const plus = document.createElement("p");
+    plus.textContent = "+";
+    div.appendChild(plus);
+
+    const text = document.createElement("p");
+    text.textContent = "Add Category...";
+    div.appendChild(text);
+
+    Sidebar.#sidebarContent.appendChild(div);
+
+    div.addEventListener("click", () => {Popup.render(categoryPopup())});
+  }
+
+  static removeCurrentProject = () => {
+    Sidebar.#currentProject = null;
+    Sidebar.#currentProjectKey = null;
   }
 }

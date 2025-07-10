@@ -57,12 +57,18 @@ body {
 }
 
 #sidebar-content {
-  margin-top: 20px;
   display: flex;
   justify-content: flex-start;
   flex-direction: column;
-  gap: 50px;
   width: 100%;
+}
+
+#sidebar-content > * {
+  margin-top: 20px;
+}
+
+#sidebar-content > :nth-child(2) {
+  margin-top: 5px;
 }
 
 .category {
@@ -82,7 +88,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: padding 0.2s, background-color 0.2s;
+    transition: padding 0.2s;
     will-change: padding;
 }
 
@@ -103,6 +109,16 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.category-title-div h2, .project-div h3{
+  max-width: 185px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  flex-shrink: 0;
+  flex-grow: 0;
 }
 
 .category-title-div p {
@@ -134,7 +150,6 @@ body {
 .category h2,
 .category h3 {
   flex-shrink: 0;
-  min-width: max-content;
 }
 
 #open-btn,
@@ -366,7 +381,7 @@ select:focus {
 
 .project-popup{
   width: 330px;
-  height: 140px;
+  height: 120px;
   padding: 8px;
 
   display: grid;
@@ -385,4 +400,23 @@ select:focus {
 
 .project-popup .popup-title{
   grid-area: name;
+}
+
+.category-padding{
+  padding: 10px;
+}
+
+.amount-remove-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.amount-remove-div img {
+  scale: 0.9;
+}
+
+img:hover{
+  cursor: pointer;
 }

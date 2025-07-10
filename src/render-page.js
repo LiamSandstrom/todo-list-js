@@ -24,7 +24,7 @@ export class Page {
   static loadPage() {
     console.log("LOAD");
     const project = ProjectManager.getManager(Page.#managerKey).getProject(Page.#projKey);
-    Page.#removePage();
+    Page.removePage();
 
     Page.#renderAddTodo(project);
     Page.#container.appendChild(Page.#sortableDiv);
@@ -79,7 +79,7 @@ export class Page {
     Sidebar.updateAmounts();
   }
 
-  static #removePage() {
+  static removePage() {
     Page.#container.innerHTML = "";
     Page.#sortableDiv.innerHTML = "";
   }

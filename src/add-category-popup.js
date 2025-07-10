@@ -3,12 +3,12 @@ import { Project } from "./project";
 import { Sidebar } from "./sidebar";
 import { Popup } from "./popup";
 
-export function projectPopup(key) {
+export function categoryPopup() {
   const div = document.createElement("div");
   div.classList.add("project-popup");
 
   const name = document.createElement("input");
-  name.placeholder = "Project name...";
+  name.placeholder = "Category name...";
   name.classList.add("popup-title");
   div.appendChild(name);
 
@@ -18,8 +18,7 @@ export function projectPopup(key) {
   div.appendChild(saveBtn);
 
   saveBtn.addEventListener("click", ()=> {
-    const manager = ProjectManager.getManager(key);
-    new Project(manager, name.value);
+    new ProjectManager(name.value);
     Sidebar.populateProjects();
     Popup.remove();
   })

@@ -17,10 +17,7 @@ assignSidebarAnimation();
 Sidebar.populateProjects();
 
 
-//add project popup
-//add project
 //Change project
 //remove project
 
-//when checked remove
 //move to completed tab 
