@@ -17,8 +17,7 @@ assignSidebarAnimation();
 Sidebar.populateProjects();
 
 
-// -remove todo
-
+//add project popup
 //add project
 //Change project
 //remove project

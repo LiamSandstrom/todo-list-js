@@ -33,7 +33,6 @@ export class Project {
     const key = crypto.randomUUID();
     this.#items.set(key, item);
     this.#order.push(key);
-    console.log(this.#order)
   }
 
   removeItem(key) {

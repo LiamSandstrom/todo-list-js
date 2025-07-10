@@ -23,15 +23,13 @@ export class Page {
 
   static loadPage() {
     console.log("LOAD");
-    const managerKey = Page.#managerKey;
-    const projKey = Page.#projKey;
-    const manager = ProjectManager.getManager(managerKey);
-    const project = manager.getProject(projKey);
+    const project = ProjectManager.getManager(Page.#managerKey).getProject(Page.#projKey);
     Page.#removePage();
 
     Page.#renderAddTodo(project);
     Page.#container.appendChild(Page.#sortableDiv);
     Page.#sortableDiv.classList.add("sortable-container");
+    Page.#currentPage = Page.#projKey;
 
     const sortable = Sortable.create(Page.#sortableDiv, {
       animation: 300,
@@ -40,11 +38,11 @@ export class Page {
         for (const ele of Page.#sortableDiv.children) {
           order.push(ele.dataset.key);
         }
-        manager.getProject(Page.#currentPage).setOrder(order);
+        console.log(Page.#currentPage)
+        ProjectManager.getManager(Page.#managerKey).getProject(Page.#currentPage).setOrder(order);
       },
     });
 
-    Page.#currentPage = projKey;
     for (const todoKey of project.getOrder()) {
       const todo = project.getItem(todoKey);
       const todoDiv = document.createElement("div");

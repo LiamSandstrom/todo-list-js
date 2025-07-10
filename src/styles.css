@@ -37,7 +37,7 @@ body {
 #container {
   display: flex;
   width: 100%;
-  height: 100%;
+   height: 100%;
 }
 
 #sidebar {
@@ -53,6 +53,7 @@ body {
   overflow: hidden;
   will-change: width;
   flex-shrink: 0;
+  overflow-y: auto;
 }
 
 #sidebar-content {
@@ -98,6 +99,25 @@ body {
   padding-left: 10px;
 }
 
+.category-title-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-title-div p {
+  color: var(--light-text-color);
+  padding: 5px;
+}
+
+.category-title-div p:hover{
+  cursor: pointer;
+}
+
+.category-title-div:hover * {
+  color: var(--accent-color);
+}
+
 .category h3 {
   font-size: 0.9rem;
   font-weight: 300;
@@ -105,6 +125,9 @@ body {
 
 .project-div:hover, .category-title-div:hover {
   background-color: var(--hover-bg);
+}
+
+.project-div:hover{
   cursor: pointer;
 }
 
@@ -148,6 +171,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   height: 100%;
+  overflow-y: auto;
   flex-grow: 1;
   background-color: var(--content-bg-color);
 }
@@ -337,4 +361,28 @@ select:focus {
   box-shadow: none;
   border: 1px solid var(--light-text-color); 
   background-color: white; 
+}
+
+
+.project-popup{
+  width: 330px;
+  height: 140px;
+  padding: 8px;
+
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  grid-template-rows:1fr 40px;
+  grid-template-areas: 
+  "name name"
+  ". save"
+  ;
+
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 11px;
+}
+
+.project-popup .popup-title{
+  grid-area: name;
 }

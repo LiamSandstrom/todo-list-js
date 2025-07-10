@@ -1,5 +1,7 @@
 import { ProjectManager } from "./project-manager";
 import { Page } from "./render-page";
+import { projectPopup } from "./add-project-popup";
+import { Popup } from "./popup";
 
 export class Sidebar {
   static #sidebarDiv = document.querySelector("#sidebar");
@@ -12,6 +14,7 @@ export class Sidebar {
   static #currentProject;
 
   static populateProjects() {
+    Sidebar.#sidebarContent.innerHTML = "";
     ProjectManager.getManagers().forEach((projManager, key) => {
       //Category title
       const title = document.createElement("h2");
@@ -26,6 +29,14 @@ export class Sidebar {
       const categoryDiv = document.createElement("div");
       categoryDiv.appendChild(title);
       categoryDiv.classList.add("category-title-div");
+      const plus = document.createElement("p");
+      plus.textContent = "+";
+
+      plus.addEventListener("click", () => {
+        Popup.render(projectPopup(key));
+      })
+      categoryDiv.appendChild(plus);
+
       managerDiv.appendChild(categoryDiv);
 
       projManager.getAllProjects().forEach((project, projKey) => {
