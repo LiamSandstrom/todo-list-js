@@ -4,6 +4,7 @@ import { opacityAnimation } from "./opacity-animation";
 import Sortable from "sortablejs";
 import { Popup } from "./popup";
 import { todoPopup } from "./add-todo-popup";
+import { Sidebar } from "./sidebar";
 
 export class Page {
   static #currentPage;
@@ -44,10 +45,8 @@ export class Page {
     });
 
     Page.#currentPage = projKey;
-
     for (const todoKey of project.getOrder()) {
       const todo = project.getItem(todoKey);
-
       const todoDiv = document.createElement("div");
       todoDiv.classList.add("todo-item");
       todoDiv.dataset.key = todoKey;
@@ -76,8 +75,10 @@ export class Page {
 
       checkBox.addEventListener("click", (event) => {
         event.stopPropagation();
+        project.removeItem(todoKey)
       })
     }
+    Sidebar.updateAmounts();
   }
 
   static #removePage() {

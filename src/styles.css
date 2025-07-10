@@ -155,6 +155,9 @@ body {
 
 #todo-container{
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sortable-container{
@@ -178,6 +181,10 @@ body {
   gap: 5px;
 
   cursor: pointer;
+}
+
+.todo-item, .add-todo-container{
+  max-width: 800px;
 }
 
 .todo-item-content{
@@ -237,13 +244,14 @@ vaadin-checkbox {
 
   display: grid;
   grid-template-columns: 5fr 100px;
-  grid-template-rows: 50px 25px 25px 1fr 40px;
+  grid-template-rows:20px 50px 25px 25px 1fr 40px;
   grid-template-areas: 
+  "lo lo"
   "title title"
   "desc date"
   "desc prio"
-  "desc bob"
-  "save save"
+  "desc ."
+  "desc save"
   ;
   flex-direction: column;
   justify-content: flex-start;
@@ -291,20 +299,42 @@ input{
 }
 
 .popup-save{
+  align-self: flex-end;
   grid-area: save;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0);
-  border-radius: 10px;
-  border: 2px solid var(--light-text-color);
-  font-size: 1.2rem;
-  font-weight: 300;
+  width: 100%;
+  height: 32px;
+  background-color: var(--accent-color);
+  color: #e8e8e8;
+  border-radius: 5px;
+  border: 0;
+  font-size: 0.95rem;
+  font-weight: 400;
 
   transition: background-color 0.3s;
+}
+
+.popup-prio{
+  grid-area: prio;
+}
+
+.popup-duedate{
+  grid-area: date
 }
 
 .popup-save:hover{
   background-color: var(--accent-color);
   color: white;
-  border-color: var(--accent-color);
   cursor: pointer;
+}
+
+input:active,
+textarea:active,
+select:active,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid var(--light-text-color); 
+  background-color: white; 
 }

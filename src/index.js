@@ -17,17 +17,11 @@ assignSidebarAnimation();
 Sidebar.populateProjects();
 
 
-//add todo item
-    // - ui for getting to pop up
-    // - create pop up 
-    // - add functionality for pop up
+// -remove todo
 
-//add project item
-    // - ui for getting to pop up
-    // - create pop up 
-    // - add functionality for pop up
-
-//Change todo item
+//add project
 //Change project
+//remove project
 
-//
+//when checked remove
+//move to completed tab 

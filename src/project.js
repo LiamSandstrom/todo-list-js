@@ -1,4 +1,5 @@
 import { ProjectManager } from "./project-manager.js";
+import { Page } from "./render-page.js";
 import { TodoItem } from "./todo-item.js";
 
 export class Project {
@@ -7,6 +8,7 @@ export class Project {
   #color;
   #projectManager;
   #order;
+  static #removeAnim = null;
 
   constructor(projectManager, name, color) {
     if(projectManager == null && typeof projectManager.addProject !== "function") throw new Error("Invalid project manager")
@@ -14,6 +16,7 @@ export class Project {
     this.#projectManager = projectManager;
     //this projects todo-items
     this.#items = new Map();
+    //keys of todos in order
     this.#order = [];
     this.#name = name;
     this.#color = color;
@@ -24,18 +27,23 @@ export class Project {
     }
 
     this.#projectManager.addProject(this);
-    for(const key of this.#items.keys()){
-    this.#order.push(key);
-    }
   }
 
   addItem(item) {
     const key = crypto.randomUUID();
     this.#items.set(key, item);
+    this.#order.push(key);
+    console.log(this.#order)
   }
 
   removeItem(key) {
     this.#items.delete(key);
+    const index = this.#order.indexOf(key);
+    this.#order.splice(index, 1);
+    clearTimeout(Project.#removeAnim)
+    Project.#removeAnim = setTimeout(()=> {
+      Page.loadPage();
+    },500)
   }
 
   //getters
@@ -45,6 +53,7 @@ export class Project {
   getColor = () => this.#color;
   getItemsAmount = () => this.#items.size;
   getOrder = () => this.#order;
+  getManager = () => this.#projectManager;
 
   //setters
   setName = () => this.#name;

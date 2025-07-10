@@ -1,9 +1,14 @@
 import { Popup } from "./popup";
 import { Page } from "./render-page";
+import { TodoItem } from "./todo-item";
 
 export function todoPopup(project, key = null) {
   const div = document.createElement("div");
   div.classList.add("todo-popup");
+
+  const todoTitle = document.createElement("p");
+  todoTitle.textContent = "Todo Item 📒";
+  div.appendChild(todoTitle);
 
   const text = document.createElement("p");
 
@@ -50,6 +55,7 @@ export function todoPopup(project, key = null) {
 
   div.appendChild(text);
 
+  //edit todo on save
   if (key != null) {
     const todo = project.getItem(key);
     title.value = todo.getTitle();
@@ -63,10 +69,22 @@ export function todoPopup(project, key = null) {
       todo.setDescription(desc.value);
       todo.setDueDate(dueDate.value);
       todo.setPriority(prio.value);
-    
+
       Page.loadPage();
       Popup.remove();
     });
   }
-    return div;
+
+  //create todo on save
+  else {
+    saveBtn.addEventListener("click", () => {
+      new TodoItem(project, title.value, desc.value, dueDate.value, prio.value);
+      console.log(project)
+
+      Popup.remove();
+      Page.loadPage();
+    });
+  }
+
+  return div;
 }
