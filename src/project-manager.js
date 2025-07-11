@@ -1,6 +1,7 @@
 import { Project } from "./project.js";
 import { Sidebar } from "./sidebar.js";
 import { Page } from "./render-page.js";
+import { Storage } from "./storage.js";
 
 export class ProjectManager {
     // Can sort projects under different managers
@@ -9,19 +10,18 @@ export class ProjectManager {
   #name;
   #id;
 
-  constructor(name) {
+  constructor(name, key = crypto.randomUUID()) {
     // this managers projects
     this.#projects = new Map();
     this.#name = name;
-    this.#id = crypto.randomUUID();
+    this.#id = key;
 
     
     ProjectManager.#managers.set(this.#id, this);
   }
 
   addProject(project) {
-    const id = crypto.randomUUID();
-    this.#projects.set(id, project);
+    this.#projects.set(project.getId(), project);
   }
 
   removeProject(key) {
@@ -32,6 +32,7 @@ export class ProjectManager {
     
     this.#projects.delete(key);
     Sidebar.populateProjects();
+    Storage.setStorage();
   }
 
   static removeManager(key){
@@ -42,11 +43,20 @@ export class ProjectManager {
 
     ProjectManager.#managers.delete(key);
     Sidebar.populateProjects();
-
+    Storage.setStorage();
   }
 
   static getManagers = () => ProjectManager.#managers;
   static getManager = (key) => ProjectManager.#managers.get(key);
+  static getProject (key){
+      for (const [managerKey, value] of ProjectManager.getManagers()) {
+    const project = value.getProject(key);
+    if (project) {
+      return project; 
+    }
+  }
+  return null; 
+  }
   getAllProjects = () => this.#projects;
   getProject = (key) => this.#projects.get(key);
   getName = () => this.#name;

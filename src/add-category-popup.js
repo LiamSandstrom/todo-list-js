@@ -2,6 +2,7 @@ import { ProjectManager } from "./project-manager";
 import { Project } from "./project";
 import { Sidebar } from "./sidebar";
 import { Popup } from "./popup";
+import { Storage } from "./storage";
 
 export function categoryPopup() {
   const div = document.createElement("div");
@@ -21,6 +22,7 @@ export function categoryPopup() {
     new ProjectManager(name.value);
     Sidebar.populateProjects();
     Popup.remove();
+    Storage.setStorage();
   })
 
   return div;

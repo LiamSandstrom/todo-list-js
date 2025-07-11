@@ -2,22 +2,17 @@ import "./styles.css";
 import { TodoItem } from "./todo-item.js";
 import { Project } from "./project.js";
 import { ProjectManager } from "./project-manager.js";
-
 import { Sidebar } from "./sidebar.js";
 import { assignSidebarAnimation } from "./hookupSidebarAnim.js";
+import { Storage } from "./storage.js";
 
-const myProjects = new ProjectManager("My Projects");
-const herProjects = new ProjectManager("Her Projects");
+Storage.load();
 
-new Project(myProjects, "Work", "red");
-new Project(myProjects, "Train", "blue");
+
 
 assignSidebarAnimation();
 
 Sidebar.populateProjects();
 
 
-//Change project
-//remove project
-
-//move to completed tab 
+//save

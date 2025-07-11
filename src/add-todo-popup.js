@@ -1,5 +1,6 @@
 import { Popup } from "./popup";
 import { Page } from "./render-page";
+import { Storage } from "./storage";
 import { TodoItem } from "./todo-item";
 
 export function todoPopup(project, key = null) {
@@ -73,6 +74,7 @@ export function todoPopup(project, key = null) {
 
       Page.loadPage();
       Popup.remove();
+      Storage.setStorage();
     });
   }
 

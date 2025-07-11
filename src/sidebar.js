@@ -19,7 +19,6 @@ export class Sidebar {
   static populateProjects() {
     Sidebar.#sidebarContent.innerHTML = "";
     Sidebar.#renderAddCategory();
-    console.log(Sidebar.#currentProject)
     
     ProjectManager.getManagers().forEach((projManager, key) => {
       //Category title
@@ -99,7 +98,6 @@ export class Sidebar {
       Sidebar.#sidebarContent.appendChild(managerDiv);
     });
 
-    console.log(Sidebar.#currentProject)
     if(Sidebar.#currentProject != null){
       const key = Sidebar.#currentProjectKey;
       const proj = document.querySelector('[data-key="' + key + '"]')

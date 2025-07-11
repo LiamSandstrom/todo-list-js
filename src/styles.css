@@ -155,10 +155,9 @@ body {
 #open-btn,
 #close-btn {
   cursor: pointer;
-  padding: 8px 25px;
+  padding: 8px 0;
   border: none;
   border-radius: 10px;
-  outline: 2px solid var(--secondary-text-color);
 
   will-change: opacity, transition;
   transition: opacity 0.8s;
@@ -177,7 +176,7 @@ body {
 }
 
 #sidebar .topbar {
-  gap: 55%;
+  gap: 70%;
 }
 
 #content {

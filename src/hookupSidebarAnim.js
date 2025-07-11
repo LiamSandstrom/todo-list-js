@@ -1,12 +1,17 @@
   import { toggleWidth } from "./toggleWidthAnim";
+  import menuImg from "./icons/menu.svg"
 
   export function assignSidebarAnimation() {
     let animRef = null;
+
 
     const animationTime = 200;
     const sidebar = document.querySelector("#sidebar");
     const openBtn = document.querySelector("#open-btn");
     const closeBtn = document.querySelector("#close-btn");
+
+    openBtn.src = menuImg;
+    closeBtn.src = menuImg;
 
     const sidebarWidth = window
       .getComputedStyle(document.body)

@@ -1,16 +1,18 @@
 import { ProjectManager } from "./project-manager.js";
 import { Page } from "./render-page.js";
 import { TodoItem } from "./todo-item.js";
+import { Storage } from "./storage.js";
 
 export class Project {
   #items;
   #name;
-  #color;
   #projectManager;
   #order;
+  #id;
+
   static #removeAnim = null;
 
-  constructor(projectManager, name, color) {
+  constructor(projectManager, name, key = crypto.randomUUID()) {
     if(projectManager == null && typeof projectManager.addProject !== "function") throw new Error("Invalid project manager")
 
     this.#projectManager = projectManager;
@@ -19,12 +21,7 @@ export class Project {
     //keys of todos in order
     this.#order = [];
     this.#name = name;
-    this.#color = color;
-
-    const randomNumber = Math.floor(Math.random() * 10);
-    for(let i = 0; i < randomNumber; i++){
-      new TodoItem(this, "Item: "+ i, "testi", "2022-11-11", 2)
-    }
+    this.#id = key;
 
     this.#projectManager.addProject(this);
   }
@@ -33,6 +30,7 @@ export class Project {
     const key = crypto.randomUUID();
     this.#items.set(key, item);
     this.#order.push(key);
+    Storage.setStorage();
   }
 
   removeItem(key) {
@@ -43,19 +41,19 @@ export class Project {
     Project.#removeAnim = setTimeout(()=> {
       Page.loadPage();
     },500)
+    Storage.setStorage();
   }
 
   //getters
   getItems = () => this.#items;
   getItem = (key) => this.#items.get(key);
   getName = () => this.#name;
-  getColor = () => this.#color;
   getItemsAmount = () => this.#items.size;
   getOrder = () => this.#order;
   getManager = () => this.#projectManager;
+  getId = ()=> this.#id;
 
   //setters
   setName = () => this.#name;
-  setColor = () => this.#color;
   setOrder = (order) => this.#order = order;
 }
