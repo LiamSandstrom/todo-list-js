@@ -5,6 +5,7 @@ import Sortable from "sortablejs";
 import { Popup } from "./popup";
 import { todoPopup } from "./add-todo-popup";
 import { Sidebar } from "./sidebar";
+import { Storage } from "./storage";
 
 export class Page {
   static #currentPage;
@@ -40,6 +41,7 @@ export class Page {
         }
         console.log(Page.#currentPage)
         ProjectManager.getManager(Page.#managerKey).getProject(Page.#currentPage).setOrder(order);
+        Storage.setStorage();
       },
     });
 

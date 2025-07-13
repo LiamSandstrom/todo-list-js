@@ -7,6 +7,7 @@ export class Storage {
   static setLoaded = (value) => localStorage.setItem("firstLoad", value);
 
   static load() {
+    //Storage.setLoaded("false")
     if (Storage.isLoaded() !== "true") {
       Storage.firstLoad();
       return;
@@ -70,7 +71,8 @@ export class Storage {
 
         projects.push(projectValues);
 
-        project.getItems().forEach((todo, todoKey) => {
+        for(const todoKey of project.getOrder()) {
+          const todo = project.getItem(todoKey)
           const todoValues = {};
           todoValues.project = projKey;
           todoValues.title = todo.getTitle();
@@ -78,7 +80,7 @@ export class Storage {
           todoValues.dueDate = todo.getDueDate();
           todoValues.prio = todo.getPriority();
           todos.push(todoValues);
-        });
+        }
       });
     });
     localStorage.setItem("managers", JSON.stringify(managers));
