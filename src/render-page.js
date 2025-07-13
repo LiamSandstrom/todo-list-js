@@ -22,10 +22,20 @@ export class Page {
     opacityAnimation(Page.#container, 700);
   }
 
+  static firstRender() {
+    const projectKey = Storage.getSelectedProject();
+    if(projectKey == "none")return;
+    const manager = ProjectManager.getProject(projectKey).getManager();
+    Page.renderPage(manager.getId(), projectKey);
+  }
+
   static loadPage() {
     console.log("LOAD");
-    const project = ProjectManager.getManager(Page.#managerKey).getProject(Page.#projKey);
+    const project = ProjectManager.getManager(Page.#managerKey).getProject(
+      Page.#projKey
+    );
     Page.removePage();
+    Storage.setSelectedProject(Page.#projKey);
 
     Page.#renderAddTodo(project);
     Page.#container.appendChild(Page.#sortableDiv);
@@ -39,8 +49,9 @@ export class Page {
         for (const ele of Page.#sortableDiv.children) {
           order.push(ele.dataset.key);
         }
-        console.log(Page.#currentPage)
-        ProjectManager.getManager(Page.#managerKey).getProject(Page.#currentPage).setOrder(order);
+        ProjectManager.getManager(Page.#managerKey)
+          .getProject(Page.#currentPage)
+          .setOrder(order);
         Storage.setStorage();
       },
     });
@@ -75,8 +86,8 @@ export class Page {
 
       checkBox.addEventListener("click", (event) => {
         event.stopPropagation();
-        project.removeItem(todoKey)
-      })
+        project.removeItem(todoKey);
+      });
     }
     Sidebar.updateAmounts();
   }
@@ -84,6 +95,7 @@ export class Page {
   static removePage() {
     Page.#container.innerHTML = "";
     Page.#sortableDiv.innerHTML = "";
+    Storage.setSelectedProject("none");
   }
 
   static #renderAddTodo(project) {

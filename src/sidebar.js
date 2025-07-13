@@ -4,6 +4,7 @@ import { projectPopup } from "./add-project-popup";
 import { Popup } from "./popup";
 import { categoryPopup } from "./add-category-popup";
 import deleteImg from "./icons/delete.svg"
+import { Storage } from "./storage";
 
 export class Sidebar {
   static #sidebarDiv = document.querySelector("#sidebar");
@@ -15,6 +16,7 @@ export class Sidebar {
   static #amounts = new Map();
   static #currentProject;
   static #currentProjectKey;
+  static #firstLoad = true;
 
   static populateProjects() {
     Sidebar.#sidebarContent.innerHTML = "";
@@ -47,6 +49,7 @@ export class Sidebar {
       plusDeleteDiv.appendChild(deleteCategory)
 
       categoryDiv.appendChild(plusDeleteDiv);
+
 
       plus.addEventListener("click", () => {
         Popup.render(projectPopup(key));
@@ -92,6 +95,13 @@ export class Sidebar {
         projectDiv.appendChild(amountRemoveDiv);
 
         managerDiv.appendChild(projectDiv);
+
+      if(Sidebar.#firstLoad){
+        const storageKey = Storage.getSelectedProject();
+        if(projKey == storageKey){
+          Sidebar.#setCurrentProject(projectDiv);
+        }
+      }
       });
 
       Sidebar.updateAmounts();
@@ -103,6 +113,8 @@ export class Sidebar {
       const proj = document.querySelector('[data-key="' + key + '"]')
       Sidebar.#setCurrentProject(proj)
     }
+
+    Sidebar.#firstLoad = false;
   }
 
   static #bindProjectOnClick(project) {

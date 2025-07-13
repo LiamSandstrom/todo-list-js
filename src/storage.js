@@ -51,6 +51,12 @@ export class Storage {
     Storage.setStorage();
   }
 
+  static setSelectedProject(projectKey){
+    localStorage.setItem("selectedProject", projectKey)
+  }
+
+  static getSelectedProject = () => localStorage.getItem("selectedProject");
+
   static setStorage() {
     const managers = [];
     const projects = [];

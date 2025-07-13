@@ -5,6 +5,7 @@ import { ProjectManager } from "./project-manager.js";
 import { Sidebar } from "./sidebar.js";
 import { assignSidebarAnimation } from "./hookupSidebarAnim.js";
 import { Storage } from "./storage.js";
+import { Page } from "./render-page.js";
 
 Storage.load();
 
@@ -13,6 +14,8 @@ Storage.load();
 assignSidebarAnimation();
 
 Sidebar.populateProjects();
+
+Page.firstRender();
 
 
 //save
